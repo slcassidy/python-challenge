@@ -7,7 +7,7 @@ import calendar
 #path of the csv file
 csvpath = os.path.join(".", "Resources", "budget_data.csv")
 
-print(csvpath)
+#print(csvpath)
 with open(csvpath, newline='') as csvfile:
 
 # CSV reader specifies delimiter and variable that holds contents
@@ -65,25 +65,34 @@ with open(csvpath, newline='') as csvfile:
             #print(profit_loss_List)
             #print(maxDate)
             #print(dateList[maxDate])
+            len_month = len(dateList)
+            #print(len_month)
 
     #Print the number of months aka rows in the file
     print("Financial Analysis")
     print("------------------------------------")
-    print("Total Months: " + str(count)) 
+    #print("Total Months: " + str(count)) 
+    print("Total Months: " + str(len_month)) 
     print("Total: $" + str(total))  
     print("Average Change: $" +str(total_change))
-    print("Max: " + str(dateList[maxDate]) + " $" +str(maxProfit))
-    print("Min: " + str(dateList[minDate]) + " $" +str(minLoss))
+    print("Greatest Increase in Profits: " + str(dateList[maxDate]) + " $" +str(maxProfit))
+    print("Greatest Decrease in Profits: " + str(dateList[minDate]) + " $" +str(minLoss))
 
-        #if (month) == Jan:
+# Set variable for output file
+output_file = os.path.join("budget_results.csv")
 
+#  Open the output file
+with open(output_file, "w", newline="", encoding='utf-8') as datafile:
+    writer = csv.writer(datafile)
 
-
-            
-        
-            #date = datetime(row[0])
-            #month = date.month
-            #print(month[0])
+    # Write the header row
+    writer.writerow(["Financial Analysis"])
+    writer.writerow(["------------------------------------"])
+    writer.writerow(["Total Months: " + str(len_month)])
+    writer.writerow(["Total: $" + str(total)])
+    writer.writerow(["Average Change: $" +str(total_change)])
+    writer.writerow(["Greatest Increase in Profits: " + str(dateList[maxDate]) + " $" +str(maxProfit)])
+    writer.writerow(["Greatest Decrease in Profits: " + str(dateList[minDate]) + " $" +str(minLoss)])
 
 
 
