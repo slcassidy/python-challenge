@@ -25,8 +25,33 @@ with open(csvpath, newline='') as csvfile:
     maxProfit = 0
     minLoss = 0
     dateList = []
+    changeRate = []
+    len_month = 0
+    minDate = 0
+    maxDate = 0
 
-#def month_count(months):
+
+    def rateChange(money):
+        length = len(money)
+        #print(length)
+        total = 0.0
+        totalChange = 0.0
+        x = 1
+        average = 0
+        while x < length:
+            moneyChange = money[x] - money[x-1]
+            #print(moneyChange)
+            changeRate.append(moneyChange)
+            total += money[x]
+            totalChange += moneyChange
+            x += 1
+        #print(changeRate)
+        #print(totalChange)
+        average = round(abs(totalChange/(length-1)),2)
+        #print(average)
+        return (average)
+    
+
     for row in csvreader:
         #Testing the Month & Count of months
             #print(row[0])
@@ -68,13 +93,19 @@ with open(csvpath, newline='') as csvfile:
             len_month = len(dateList)
             #print(len_month)
 
+            
+
+    #Average Change testing
+    #rateChange(profit_loss_List)
+    #print(rateChange(profit_loss_List))
+
     #Print the number of months aka rows in the file
     print("Financial Analysis")
     print("------------------------------------")
     #print("Total Months: " + str(count)) 
     print("Total Months: " + str(len_month)) 
     print("Total: $" + str(total))  
-    print("Average Change: $" +str(total_change))
+    print("Average Change: $" +str(rateChange(profit_loss_List)))
     print("Greatest Increase in Profits: " + str(dateList[maxDate]) + " $" +str(maxProfit))
     print("Greatest Decrease in Profits: " + str(dateList[minDate]) + " $" +str(minLoss))
 
@@ -90,7 +121,7 @@ with open(output_file, "w", newline="", encoding='utf-8') as datafile:
     writer.writerow(["------------------------------------"])
     writer.writerow(["Total Months: " + str(len_month)])
     writer.writerow(["Total: $" + str(total)])
-    writer.writerow(["Average Change: $" +str(total_change)])
+    writer.writerow(["Average Change: $" +str(rateChange(profit_loss_List))])
     writer.writerow(["Greatest Increase in Profits: " + str(dateList[maxDate]) + " $" +str(maxProfit)])
     writer.writerow(["Greatest Decrease in Profits: " + str(dateList[minDate]) + " $" +str(minLoss)])
 
