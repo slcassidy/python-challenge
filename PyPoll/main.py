@@ -93,5 +93,11 @@ final_reorder = votes_pd_rename[["Candidate","Percentage Won","Votes"]]
 #print(final_pd)
 print(final_reorder)
 print("----------------------------")
-
+max_Votes = final_reorder["Votes"].max()
+#print(max_Votes.index())
+#max_Cand = final_reorder["Votes" == max_Votes]
+#max_Cand = final_reorder.groupby(["Candidate"])["Votes"].max()
+#max_Cand = final_reorder.index(max_Votes.index())
+print(max_Votes)
+#print(max_Cand)
 print("----------------------------")
