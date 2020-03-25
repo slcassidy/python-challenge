@@ -49,9 +49,9 @@ with open(csvpath, newline='') as csvfile:
                    finalList.append(name[x])
                i += 1
             x += 1
-        print("Final")  
-        print(listLength)
-        print(finalList)
+        #print("Final")  
+        #print(listLength)
+        #print(finalList)
         return(finalList)
 
     # Reading the file
@@ -68,5 +68,30 @@ print("----------------------------")
 print("Total Votes: " + (str(len(Voter_ID))))
 #print(Voter_ID)
 print("----------------------------")
-votes = data_file_pd["Candidate"].value_counts()
-print(votes)
+votes_pd = data_file_pd["Candidate"].value_counts()
+#print(votes_pd)
+
+votes_pd1 = votes_pd.reset_index()
+
+votes_pd_rename = votes_pd1.rename(columns={
+    "":"index","index":"Candidate","Candidate":"Votes"
+})
+
+percentage_pd = (votes_pd_rename["Votes"]/len(Voter_ID)) * 100
+#percentage_pd.astype(str) + '%'
+votes_pd_rename["Percentage Won"] = percentage_pd.round(decimals=4).astype(str) + '%'
+#.round(decimals=4)
+#.astype(str) + '%'
+final_pd = votes_pd_rename.head()
+
+final_reorder = votes_pd_rename[["Candidate","Percentage Won","Votes"]]
+#final_reorder.["Percentage Won"].round(decimals=4)
+#final_reorder.index(drop=True)
+#votes_pd1 = data_file_pd["Candidate"].value_counts().unstack().fillna(0)
+#print(votes_pd1)
+#print(votes_pd_rename)
+#print(final_pd)
+print(final_reorder)
+print("----------------------------")
+
+print("----------------------------")
