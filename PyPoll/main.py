@@ -107,3 +107,22 @@ print("Winner " + str(max_Cand))
 #print(max_reset)
 print("----------------------------")
 
+# Set variable for output file
+output_file = os.path.join("Vote_results.csv")
+
+#  Open the output file
+with open(output_file, "w", newline="", encoding='utf-8') as datafile:
+    writer = csv.writer(datafile)
+
+    # Write the header row
+    writer.writerow(["Election Results"])
+    writer.writerow(["------------------------------------"])
+    writer.writerow(["Total Votes: " + (str(len(Voter_ID)))])
+    writer.writerow(["------------------------------------"])
+    final_reorder.to_csv("Vote_results.csv", mode="a", index=False, header=True)
+    writer.writerow([final_reorder])
+    writer.writerow(["------------------------------------"])
+    writer.writerow(["Winner " + str(max_Cand)])
+    writer.writerow(["------------------------------------"])
+
+
