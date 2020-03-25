@@ -2,10 +2,17 @@ import os
 import csv
 from datetime import datetime
 import calendar
+import pandas as pd
 #import panda
 
 #path of the csv file
 csvpath = os.path.join(".", "Resources", "election_data.csv")
+# Save path for the panda
+data_file = "Resources/election_data.csv"
+#Read the panda files
+data_file_pd = pd.read_csv(data_file)
+#Testing to see the data
+#print(data_file_pd.head(6))
 
 #print(csvpath)
 with open(csvpath, newline='') as csvfile:
@@ -61,3 +68,5 @@ print("----------------------------")
 print("Total Votes: " + (str(len(Voter_ID))))
 #print(Voter_ID)
 print("----------------------------")
+votes = data_file_pd["Candidate"].value_counts()
+print(votes)

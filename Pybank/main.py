@@ -14,14 +14,10 @@ with open(csvpath, newline='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 #Skip first row
     csv_header = next(csvreader)
+#Variables
     count = 0
     total = 0
-    change = 0
-    changeList = [0]
-    total_change = 0
     profit_loss_List = []
- #   profit_list = []
-#   loss_list = []
     maxProfit = 0
     minLoss = 0
     dateList = []
@@ -30,7 +26,7 @@ with open(csvpath, newline='') as csvfile:
     minDate = 0
     maxDate = 0
 
-
+#Function to get the Average Change
     def rateChange(money):
         length = len(money)
         #print(length)
@@ -66,25 +62,16 @@ with open(csvpath, newline='') as csvfile:
             profit_loss = int(row[1])
             #print(profit_loss)
             total += profit_loss
-        #Get the average change
-            #change = (profit_loss - changeList[count]) 
-            #change = profit_loss - change
-            #changeList.append(change)
-            #print(change)
-            #print(changeList[count])
-            #total_change += changeList[0]
-        #Max in the list
+        #Get Min and Max of the profits and losses
+            #Create an array with the list of profits
             profit_loss_List.append(profit_loss)
+            #create array with list of Dates
             dateList.append(row[0]) 
-            #if (profit_loss >= 1):
-                #print(profit_loss)
-                #profit_list.append(profit_loss)
-            #if (profit_loss < 0):
-                #loss_list.append(profit_loss)
-            #maxProfit = max(profit_list)
-            #minLoss = min(loss_list)
+            #Max in the list
             maxProfit = max(profit_loss_List)
+            #Min in the list
             minLoss = min(profit_loss_List)
+            #Find the dates of the min and max
             minDate = profit_loss_List.index(minLoss)
             maxDate = profit_loss_List.index(maxProfit)
             #print(profit_loss_List)
@@ -106,8 +93,8 @@ with open(csvpath, newline='') as csvfile:
     print("Total Months: " + str(len_month)) 
     print("Total: $" + str(total))  
     print("Average Change: $" +str(rateChange(profit_loss_List)))
-    print("Greatest Increase in Profits: " + str(dateList[maxDate]) + " $" +str(maxProfit))
-    print("Greatest Decrease in Profits: " + str(dateList[minDate]) + " $" +str(minLoss))
+    print("Greatest Increase in Profits: " + str(dateList[maxDate]) + " $" +str(max(changeRate)))
+    print("Greatest Decrease in Profits: " + str(dateList[minDate]) + " $" +str(min(changeRate)))
 
 # Set variable for output file
 output_file = os.path.join("budget_results.csv")
@@ -122,8 +109,8 @@ with open(output_file, "w", newline="", encoding='utf-8') as datafile:
     writer.writerow(["Total Months: " + str(len_month)])
     writer.writerow(["Total: $" + str(total)])
     writer.writerow(["Average Change: $" +str(rateChange(profit_loss_List))])
-    writer.writerow(["Greatest Increase in Profits: " + str(dateList[maxDate]) + " $" +str(maxProfit)])
-    writer.writerow(["Greatest Decrease in Profits: " + str(dateList[minDate]) + " $" +str(minLoss)])
+    writer.writerow(["Greatest Increase in Profits: " + str(dateList[maxDate]) + " $" +str(max(changeRate))])
+    writer.writerow(["Greatest Decrease in Profits: " + str(dateList[minDate]) + " $" +str(min(changeRate))])
 
 
 
