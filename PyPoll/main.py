@@ -108,21 +108,39 @@ print("Winner " + str(max_Cand))
 print("----------------------------")
 
 # Set variable for output file
-output_file = os.path.join("Vote_results.csv")
+#output_file = os.path.join("Vote_results.csv")
 
+#Output with Panda
+df_header = pd.DataFrame(["Election Results"])
+df_lines = pd.DataFrame(["------------------------------------"])
+df_total = pd.DataFrame(["Total Votes: " + (str(len(Voter_ID)))])
+df_winner = pd.DataFrame(["Winner " + (str(max_Cand))])
+#print(df_header)
+df_header.to_csv("Vote_results.csv", mode="a", index=False, header=True)
+df_lines.to_csv("Vote_results.csv", mode="a", index=False, header=True)
+df_total.to_csv("Vote_results.csv", mode="a", index=False, header=True)
+df_lines.to_csv("Vote_results.csv", mode="a", index=False, header=True)
+final_reorder.to_csv("Vote_results.csv", mode="a", index=False, header=True)
+df_lines.to_csv("Vote_results.csv", mode="a", index=False, header=True)
+df_winner.to_csv("Vote_results.csv", mode="a", index=False, header=True)
+df_lines.to_csv("Vote_results.csv", mode="a", index=False, header=True)
 #  Open the output file
-with open(output_file, "w", newline="", encoding='utf-8') as datafile:
-    writer = csv.writer(datafile)
+#with open(output_file, "w", newline="", encoding='utf-8') as datafile:
+    #writer = csv.writer(datafile)
+    #writer1 = csv.writer(final_reorder)
 
     # Write the header row
-    writer.writerow(["Election Results"])
-    writer.writerow(["------------------------------------"])
-    writer.writerow(["Total Votes: " + (str(len(Voter_ID)))])
-    writer.writerow(["------------------------------------"])
-    final_reorder.to_csv("Vote_results.csv", mode="a", index=False, header=True)
-    writer.writerow([final_reorder])
-    writer.writerow(["------------------------------------"])
-    writer.writerow(["Winner " + str(max_Cand)])
-    writer.writerow(["------------------------------------"])
+    #writer.writerow(["Election Results"])
+    #title = (["Election Results"])
+    #df_concat =pd.concat(title,separate)
+    #writer.writerow(["------------------------------------"])
+    #separate = (["------------------------------------"])
+    #writer.writerow(["Total Votes: " + (str(len(Voter_ID)))])
+    #writer.writerow(["------------------------------------"])
+    #final_reorder.to_csv("Vote_results.csv", mode="a", index=False, header=True)
+    #writer.writerow([final_reorder])
+    #writer.writerow(["------------------------------------"])
+    #writer.writerow(["Winner " + str(max_Cand)])
+    #writer.writerow(["------------------------------------"])
 
 
